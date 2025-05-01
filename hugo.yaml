@@ -1,4 +1,4 @@
-baseURL: https://example.org/
+baseURL: dave365.github.io
 languageCode: en-us
 title: Dave365 Blog
 theme: ["PaperMod"]
@@ -13,6 +13,8 @@ params:
   socialIcons: # optional
     - name: "linkedin"
       url: "https://www.linkedin.com/in/david-buckley-4b2695166/"
+    - name: "youtube"
+      url: "https://www.youtube.com/@Dave-MS365"
 
 caches:
   images:
