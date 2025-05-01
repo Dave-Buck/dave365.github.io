@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on Dave365 Blog</title>
-    <link>http://localhost:1313/posts/</link>
-    <description>Recent content in Posts on Dave365 Blog</description>
+    <title>Graph on Dave365 Blog</title>
+    <link>http://localhost:1313/tags/graph/</link>
+    <description>Recent content in Graph on Dave365 Blog</description>
     <generator>Hugo -- 0.146.7</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 30 Apr 2025 16:13:17 +0100</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/graph/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID</title>
       <link>http://localhost:1313/posts/http-for-entra/</link>

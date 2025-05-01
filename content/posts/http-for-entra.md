@@ -2,6 +2,9 @@
 date: "2025-04-30T16:13:17+01:00"
 draft: false
 title: "🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID"
+tags:
+  - Power Automate
+  - Graph
 ---
 
 ## TL;DR - Watch the Video Tutorial
@@ -16,7 +19,7 @@ Using the standard **“Send a Microsoft Graph HTTP Request”** connector? No l
 
 > ❌ "URI path is not a valid Graph endpont."
 
-![Standard Connector Error](/static/http-for-entra/failed_request.png)
+![Standard Connector Error](/http-for-entra/failed_request.png)
 
 Sure, I could have created an **App Registration**, but managing client secrets and access tokens adds overhead I wasn’t looking for. Thankfully, there’s a better way.
 
@@ -57,7 +60,7 @@ GET https://graph.microsoft.com/beta/teamsTemplates
 
 If this fails (as expected), it means that scope (`TeamTemplates.Read`) isn’t yet granted.
 
-![HTTP With Microsoft Entra](/static/http-for-entra/http_with_entra.png)
+![HTTP With Microsoft Entra](/http-for-entra/http_with_entra.png)
 
 ---
 
@@ -65,7 +68,7 @@ If this fails (as expected), it means that scope (`TeamTemplates.Read`) isn’t 
 
 Microsoft provides a [PowerShell script](https://github.com/microsoft/PowerApps-Samples/blob/master/powershell/connectors/HTTPWithMicrosoftEntraId/ManagePermissionGrant.ps1) that simplifies updating app permissions.
 
-![Permissions Grant via PowerShell](/static/http-for-entra/powershell_script.png)
+![Permissions Grant via PowerShell](/http-for-entra/powershell_script.png)
 
 📌 **Key Tips:**
 
@@ -80,7 +83,7 @@ Once you grant the necessary scopes (e.g., `TeamTemplates.Read.All`), your flow 
 
 After assigning the correct permissions and re-testing:
 
-![Successful Call](/static/http-for-entra/successful_request.png)
+![Successful Call](/http-for-entra/successful_request.png)
 
 You’ll be able to successfully call the previously blocked Graph endpoint.
 
