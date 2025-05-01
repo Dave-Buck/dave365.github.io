@@ -2,10 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Dave365 Blog</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://www.dave365.blog/tags/</link>
     <description>Recent content in Tags on Dave365 Blog</description>
     <generator>Hugo -- 0.146.7</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Apr 2025 16:13:17 +0100</lastBuildDate>
+    <atom:link href="https://www.dave365.blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Graph</title>
+      <link>https://www.dave365.blog/tags/graph/</link>
+      <pubDate>Wed, 30 Apr 2025 16:13:17 +0100</pubDate>
+      <guid>https://www.dave365.blog/tags/graph/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Power Automate</title>
+      <link>https://www.dave365.blog/tags/power-automate/</link>
+      <pubDate>Wed, 30 Apr 2025 16:13:17 +0100</pubDate>
+      <guid>https://www.dave365.blog/tags/power-automate/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

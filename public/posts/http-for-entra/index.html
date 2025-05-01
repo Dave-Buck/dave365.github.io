@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
-<title>🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID | Dave365 Blog</title>
+<meta name="robots" content="index, follow">
+<title>🚀 Unlocking API Endpoints in Power Automate with HTTP and Entra ID | Dave365 Blog</title>
 <meta name="keywords" content="Power Automate, Graph">
 <meta name="description" content="TL;DR - Watch the Video Tutorial
 
@@ -15,16 +15,16 @@
 🧩 The Question: Can I leverage exsiting connectors to make Graph API calls?
 Recently, I found myself needing to query the Teams Templates API via Power Automate. I wanted to try and use out of the box connectors, but found that specific endpoints were blocked.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/http-for-entra/">
+<link rel="canonical" href="https://www.dave365.blog/posts/http-for-entra/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://www.dave365.blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.dave365.blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.dave365.blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://www.dave365.blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://www.dave365.blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/http-for-entra/">
+<link rel="alternate" hreflang="en" href="https://www.dave365.blog/posts/http-for-entra/">
 <noscript>
     <style>
         #theme-toggle,
@@ -61,7 +61,77 @@ Recently, I found myself needing to query the Teams Templates API via Power Auto
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="https://www.dave365.blog/posts/http-for-entra/">
+  <meta property="og:site_name" content="Dave365 Blog">
+  <meta property="og:title" content="🚀 Unlocking API Endpoints in Power Automate with HTTP and Entra ID">
+  <meta property="og:description" content="TL;DR - Watch the Video Tutorial 🧩 The Question: Can I leverage exsiting connectors to make Graph API calls? Recently, I found myself needing to query the Teams Templates API via Power Automate. I wanted to try and use out of the box connectors, but found that specific endpoints were blocked.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-30T16:13:17+01:00">
+    <meta property="article:modified_time" content="2025-04-30T16:13:17+01:00">
+    <meta property="article:tag" content="Power Automate">
+    <meta property="article:tag" content="Graph">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="🚀 Unlocking API Endpoints in Power Automate with HTTP and Entra ID">
+<meta name="twitter:description" content="TL;DR - Watch the Video Tutorial
+
+      
+    
+
+🧩 The Question: Can I leverage exsiting connectors to make Graph API calls?
+Recently, I found myself needing to query the Teams Templates API via Power Automate. I wanted to try and use out of the box connectors, but found that specific endpoints were blocked.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://www.dave365.blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "🚀 Unlocking API Endpoints in Power Automate with HTTP and Entra ID",
+      "item": "https://www.dave365.blog/posts/http-for-entra/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "🚀 Unlocking API Endpoints in Power Automate with HTTP and Entra ID",
+  "name": "🚀 Unlocking API Endpoints in Power Automate with HTTP and Entra ID",
+  "description": "TL;DR - Watch the Video Tutorial 🧩 The Question: Can I leverage exsiting connectors to make Graph API calls? Recently, I found myself needing to query the Teams Templates API via Power Automate. I wanted to try and use out of the box connectors, but found that specific endpoints were blocked.\n",
+  "keywords": [
+    "Power Automate", "Graph"
+  ],
+  "articleBody": "TL;DR - Watch the Video Tutorial 🧩 The Question: Can I leverage exsiting connectors to make Graph API calls? Recently, I found myself needing to query the Teams Templates API via Power Automate. I wanted to try and use out of the box connectors, but found that specific endpoints were blocked.\nUsing the standard “Send a Microsoft Graph HTTP Request” connector? No luck. The request would consistently fail:\n❌ “URI path is not a valid Graph endpont.”\nSure, I could have created an App Registration, but managing client secrets and access tokens adds overhead I wasn’t looking for. Thankfully, there’s a better way.\n✅ The Solution: HTTP with Entra ID Connector Enter: the HTTP with Entra ID connector. This connector has flown under the radar for me and allows you to make any API request within Microsoft 365 if used correctly.\nThere are two flavors of this connector:\nPreauthorized Connector – Comes with a fixed set of pre-consented scopes. Customizable Connector – Lets you configure your own permissions (via PowerShell). 🔍 Step-by-Step: Enable API Access Without App Registrations 1. Add the HTTP with Entra ID Connector Choose either the preauthorized or customizable variant. If you’re targeting non-standard scopes like TeamTemplates.Read, you’ll need the customizable version.\nImportant: This requires a Premium License and Global Admin approval.\n2. Run Your First Request Use a simple test call like:\nGET https://graph.microsoft.com/v1.0/me\nThis verifies the delegated identity works. If successful, you’re authenticated!\n3. Try the Beta Teams Templates Endpoint Input something like:\nGET https://graph.microsoft.com/beta/teamsTemplates\nIf this fails (as expected), it means that scope (TeamTemplates.Read) isn’t yet granted.\n🛠️ Granting Permissions via PowerShell Microsoft provides a PowerShell script that simplifies updating app permissions.\n📌 Key Tips:\nUse Ctrl+Click to select multiple scopes — or you’ll overwrite previous ones. Choose “Impersonate All Users” with caution — ensure security via DLP and Conditional Access. Once you grant the necessary scopes (e.g., TeamTemplates.Read.All), your flow should now work like magic.\n✅ Success! API Access Unlocked After assigning the correct permissions and re-testing:\nYou’ll be able to successfully call the previously blocked Graph endpoint.\nNote: This process can be repeated for multipe graph requests, or any other available API.\n⚠️ Things to Watch Out For These are delegated permissions, not application-level. MFA or conditional access policies might interfere. Ensure your environment’s DLP policies don’t allow data leakage. 📚 Resources 📄 Official Docs – HTTP with Entra ID 🧑‍💻 Timo Pertilä Blog 🛠️ Davids Blog 🎯 Final Thoughts This technique is a brilliant workaround when you don’t want to dive into full-blown app registrations. Whether you’re building lightweight flows or experimenting with Microsoft Graph’s beta APIs, HTTP with Entra ID could suit your needs.\nLet me know what you build with it — and stay tuned for more Power Platform tricks.\n",
+  "wordCount" : "461",
+  "inLanguage": "en",
+  "datePublished": "2025-04-30T16:13:17+01:00",
+  "dateModified": "2025-04-30T16:13:17+01:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.dave365.blog/posts/http-for-entra/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Dave365 Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.dave365.blog/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -79,7 +149,7 @@ Recently, I found myself needing to query the Teams Templates API via Power Auto
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Dave365 Blog (Alt + H)">Dave365 Blog</a>
+            <a href="https://www.dave365.blog/" accesskey="h" title="Dave365 Blog (Alt + H)">Dave365 Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -113,7 +183,7 @@ Recently, I found myself needing to query the Teams Templates API via Power Auto
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
-      🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID
+      🚀 Unlocking API Endpoints in Power Automate with HTTP and Entra ID
     </h1>
     <div class="post-meta"><span title='2025-04-30 16:13:17 +0100 BST'>April 30, 2025</span>
 
@@ -194,15 +264,15 @@ Recently, I found myself needing to query the Teams Templates API via Power Auto
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/power-automate/">Power Automate</a></li>
-      <li><a href="http://localhost:1313/tags/graph/">Graph</a></li>
+      <li><a href="https://www.dave365.blog/tags/power-automate/">Power Automate</a></li>
+      <li><a href="https://www.dave365.blog/tags/graph/">Graph</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">Dave365 Blog</a></span> · 
+        <span>&copy; 2025 <a href="https://www.dave365.blog/">Dave365 Blog</a></span> · 
 
     <span>
         Powered by

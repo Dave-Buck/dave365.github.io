@@ -1,7 +1,7 @@
 ---
 date: "2025-04-30T16:13:17+01:00"
 draft: false
-title: "🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID"
+title: "🚀 Unlocking API Endpoints in Power Automate with HTTP and Entra ID"
 tags:
   - Power Automate
   - Graph
