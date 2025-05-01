@@ -1,0 +1,19 @@
+baseURL: https://example.org/
+languageCode: en-us
+title: Dave365 Blog
+theme: ["PaperMod"]
+
+params:
+  homeInfoParams:
+    Title: 👋 Hello and welcome to Dave365
+    Content:
+      In this blog I will be covering all things Microsoft 365, generally just things I find useful or interesting (sad, I know).
+      As an FYI, my workflow involves recording a video, taking the transcript and using AI to produce a blog-style version of it (with some editing).
+      I am not interested in adding more AI slop to the internet, but I am interested in saving my time producing these.
+  socialIcons: # optional
+    - name: "linkedin"
+      url: "https://www.linkedin.com/in/david-buckley-4b2695166/"
+
+caches:
+  images:
+    dir: :cacheDir/images

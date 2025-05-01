@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID | Dave365 Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="TL;DR - Watch the Video Tutorial
+
+      
+    
+
+🧩 The Question: Can I leverage exsiting connectors to make Graph API calls?
+Recently, I found myself needing to query the Teams Templates API via Power Automate. The goal was simple — call the Graph beta endpoint to get available Teams templates.">
+<meta name="author" content="">
+<link rel="canonical" href="https://example.org/posts/http-for-entra/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.org/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.org/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.org/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.org/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.org/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.org/posts/http-for-entra/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://example.org/posts/http-for-entra/">
+  <meta property="og:site_name" content="Dave365 Blog">
+  <meta property="og:title" content="🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID">
+  <meta property="og:description" content="TL;DR - Watch the Video Tutorial 🧩 The Question: Can I leverage exsiting connectors to make Graph API calls? Recently, I found myself needing to query the Teams Templates API via Power Automate. The goal was simple — call the Graph beta endpoint to get available Teams templates.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-30T16:13:17+01:00">
+    <meta property="article:modified_time" content="2025-04-30T16:13:17+01:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID">
+<meta name="twitter:description" content="TL;DR - Watch the Video Tutorial
+
+      
+    
+
+🧩 The Question: Can I leverage exsiting connectors to make Graph API calls?
+Recently, I found myself needing to query the Teams Templates API via Power Automate. The goal was simple — call the Graph beta endpoint to get available Teams templates.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.org/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID",
+      "item": "https://example.org/posts/http-for-entra/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID",
+  "name": "🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID",
+  "description": "TL;DR - Watch the Video Tutorial 🧩 The Question: Can I leverage exsiting connectors to make Graph API calls? Recently, I found myself needing to query the Teams Templates API via Power Automate. The goal was simple — call the Graph beta endpoint to get available Teams templates.\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "TL;DR - Watch the Video Tutorial 🧩 The Question: Can I leverage exsiting connectors to make Graph API calls? Recently, I found myself needing to query the Teams Templates API via Power Automate. The goal was simple — call the Graph beta endpoint to get available Teams templates.\nUsing the standard “Send HTTP request to Graph” connector? No luck. The request would consistently fail:\n❌ “The endpoint isn’t supported by this connector.”\nSure, I could have created an App Registration, but managing client secrets and access tokens adds overhead I wasn’t looking for. Thankfully, there’s a better way.\n✅ The Solution: HTTP with Entra ID Connector Enter: the HTTP with Entra ID connector. This under-the-radar gem allows you to make authenticated HTTP requests — even to endpoints not officially supported.\nThere are two flavors of this connector:\nPreauthorized Connector – Comes with a fixed set of pre-consented scopes. Customizable Connector – Lets you configure your own permissions (via PowerShell). 🔍 Step-by-Step: Enable API Access Without App Registrations 1. Add the HTTP with Entra ID Connector Choose either the preauthorized or customizable variant. If you’re targeting non-standard scopes like TeamTemplates.Read, you’ll need the customizable version.\nImportant: This requires a Premium License and Global Admin approval.\n2. Run Your First Request Use a simple test call like:\nGET https://graph.microsoft.com/v1.0/me\nThis verifies the delegated identity works. If successful, you’re authenticated!\n3. Try the Beta Teams Templates Endpoint Input something like:\nGET https://graph.microsoft.com/beta/teamsTemplates\nIf this fails (as expected), it means that scope (TeamTemplates.Read) isn’t yet granted.\n🛠️ Granting Permissions via PowerShell Microsoft provides a PowerShell script that simplifies updating app permissions.\n📌 Key Tips:\nUse Ctrl+Click to select multiple scopes — or you’ll overwrite previous ones. Choose “Impersonate All Users” with caution — ensure security via DLP and Conditional Access. Once you grant the necessary scopes (e.g., TeamTemplates.Read.All), your flow should now work like magic.\n✅ Success! API Access Unlocked After assigning the correct permissions and re-testing:\nYou’ll be able to successfully call the previously blocked Graph endpoint.\n⚠️ Things to Watch Out For These are delegated permissions, not application-level. MFA or conditional access policies might interfere. Ensure your environment’s DLP policies don’t allow data leakage. 📚 Resources 📄 Official Docs – HTTP with Entra ID 🧑‍💻 Timo Pertilä Blog 🛠️ PowerShell Script from Docs 🎯 Final Thoughts This technique is a brilliant workaround when you don’t want to dive into full-blown app registrations. Whether you’re building lightweight flows or experimenting with Microsoft Graph’s beta APIs, HTTP with Entra ID is a powerful ally.\nLet me know what you build with it — and stay tuned for more Power Platform tricks.\n",
+  "wordCount" : "437",
+  "inLanguage": "en",
+  "datePublished": "2025-04-30T16:13:17+01:00",
+  "dateModified": "2025-04-30T16:13:17+01:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.org/posts/http-for-entra/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Dave365 Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.org/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://example.org/" accesskey="h" title="Dave365 Blog (Alt + H)">Dave365 Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate with HTTP and Entra ID
+    </h1>
+    <div class="post-meta"><span title='2025-04-30 16:13:17 +0100 BST'>April 30, 2025</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="tldr---watch-the-video-tutorial">TL;DR - Watch the Video Tutorial<a hidden class="anchor" aria-hidden="true" href="#tldr---watch-the-video-tutorial">#</a></h2>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Cs-iQBPpCXI?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+<h2 id="-the-question-can-i-leverage-exsiting-connectors-to-make-graph-api-calls">🧩 The Question: Can I leverage exsiting connectors to make Graph API calls?<a hidden class="anchor" aria-hidden="true" href="#-the-question-can-i-leverage-exsiting-connectors-to-make-graph-api-calls">#</a></h2>
+<p>Recently, I found myself needing to query the <a href="https://learn.microsoft.com/en-us/graph/api/teamsappinstallation-get?view=graph-rest-beta&amp;tabs=http">Teams Templates API</a> via Power Automate. The goal was simple — call the Graph beta endpoint to get available Teams templates.</p>
+<p>Using the standard <strong>“Send HTTP request to Graph”</strong> connector? No luck. The request would consistently fail:</p>
+<blockquote>
+<p>❌ &ldquo;The endpoint isn&rsquo;t supported by this connector.&rdquo;</p></blockquote>
+<p><img alt="Standard Connector Error" loading="lazy" src="screenshots/screenshot_0-00-50.png"></p>
+<p>Sure, I could have created an <strong>App Registration</strong>, but managing client secrets and access tokens adds overhead I wasn’t looking for. Thankfully, there’s a better way.</p>
+<hr>
+<h2 id="-the-solution-http-with-entra-id-connector">✅ The Solution: HTTP with Entra ID Connector<a hidden class="anchor" aria-hidden="true" href="#-the-solution-http-with-entra-id-connector">#</a></h2>
+<p>Enter: the <strong>HTTP with Entra ID connector</strong>. This under-the-radar gem allows you to make authenticated HTTP requests — even to endpoints not officially supported.</p>
+<p>There are <strong>two flavors</strong> of this connector:</p>
+<ol>
+<li><strong>Preauthorized Connector</strong> – Comes with a fixed set of pre-consented scopes.</li>
+<li><strong>Customizable Connector</strong> – Lets you configure your own permissions (via PowerShell).</li>
+</ol>
+<hr>
+<h2 id="-step-by-step-enable-api-access-without-app-registrations">🔍 Step-by-Step: Enable API Access Without App Registrations<a hidden class="anchor" aria-hidden="true" href="#-step-by-step-enable-api-access-without-app-registrations">#</a></h2>
+<h3 id="1-add-the-http-with-entra-id-connector">1. Add the HTTP with Entra ID Connector<a hidden class="anchor" aria-hidden="true" href="#1-add-the-http-with-entra-id-connector">#</a></h3>
+<p>Choose either the preauthorized or customizable variant. If you&rsquo;re targeting non-standard scopes like <code>TeamTemplates.Read</code>, you&rsquo;ll need the <strong>customizable</strong> version.</p>
+<blockquote>
+<p><strong>Important</strong>: This requires a <strong>Premium License</strong> and <strong>Global Admin</strong> approval.</p></blockquote>
+<h3 id="2-run-your-first-request">2. Run Your First Request<a hidden class="anchor" aria-hidden="true" href="#2-run-your-first-request">#</a></h3>
+<p>Use a simple test call like:</p>
+<p>GET <a href="https://graph.microsoft.com/v1.0/me">https://graph.microsoft.com/v1.0/me</a></p>
+<p>This verifies the delegated identity works. If successful, you’re authenticated!</p>
+<h3 id="3-try-the-beta-teams-templates-endpoint">3. Try the Beta Teams Templates Endpoint<a hidden class="anchor" aria-hidden="true" href="#3-try-the-beta-teams-templates-endpoint">#</a></h3>
+<p>Input something like:</p>
+<p>GET <a href="https://graph.microsoft.com/beta/teamsTemplates">https://graph.microsoft.com/beta/teamsTemplates</a></p>
+<p>If this fails (as expected), it means that scope (<code>TeamTemplates.Read</code>) isn’t yet granted.</p>
+<hr>
+<h2 id="-granting-permissions-via-powershell">🛠️ Granting Permissions via PowerShell<a hidden class="anchor" aria-hidden="true" href="#-granting-permissions-via-powershell">#</a></h2>
+<p>Microsoft provides a <a href="https://learn.microsoft.com/en-us/power-platform/power-automate/http-with-entra-id#configure-api-permissions">PowerShell script</a> that simplifies updating app permissions.</p>
+<p><img alt="Permissions Grant via PowerShell" loading="lazy" src="screenshots/screenshot_0-02-50.png"></p>
+<p>📌 <strong>Key Tips:</strong></p>
+<ul>
+<li>Use <strong>Ctrl+Click</strong> to select multiple scopes — or you’ll overwrite previous ones.</li>
+<li>Choose <strong>“Impersonate All Users”</strong> with caution — ensure security via <strong>DLP and Conditional Access</strong>.</li>
+</ul>
+<p>Once you grant the necessary scopes (e.g., <code>TeamTemplates.Read.All</code>), your flow should now work like magic.</p>
+<hr>
+<h2 id="-success-api-access-unlocked">✅ Success! API Access Unlocked<a hidden class="anchor" aria-hidden="true" href="#-success-api-access-unlocked">#</a></h2>
+<p>After assigning the correct permissions and re-testing:</p>
+<p><img alt="Successful Call" loading="lazy" src="screenshots/screenshot_0-06-40.png"></p>
+<p>You’ll be able to successfully call the previously blocked Graph endpoint.</p>
+<hr>
+<h2 id="-things-to-watch-out-for">⚠️ Things to Watch Out For<a hidden class="anchor" aria-hidden="true" href="#-things-to-watch-out-for">#</a></h2>
+<ul>
+<li>These are <strong>delegated permissions</strong>, not application-level.</li>
+<li><strong>MFA</strong> or <strong>conditional access</strong> policies might interfere.</li>
+<li>Ensure your <strong>environment’s DLP policies</strong> don’t allow data leakage.</li>
+</ul>
+<hr>
+<h2 id="-resources">📚 Resources<a hidden class="anchor" aria-hidden="true" href="#-resources">#</a></h2>
+<ul>
+<li>📄 <a href="https://learn.microsoft.com/en-us/power-platform/power-automate/http-with-entra-id">Official Docs – HTTP with Entra ID</a></li>
+<li>🧑‍💻 <a href="https://some-example.com">Timo Pertilä Blog</a></li>
+<li>🛠️ <a href="https://learn.microsoft.com/en-us/power-platform/power-automate/http-with-entra-id#configure-api-permissions">PowerShell Script from Docs</a></li>
+</ul>
+<hr>
+<h2 id="-final-thoughts">🎯 Final Thoughts<a hidden class="anchor" aria-hidden="true" href="#-final-thoughts">#</a></h2>
+<p>This technique is a brilliant workaround when you don’t want to dive into full-blown app registrations. Whether you’re building lightweight flows or experimenting with Microsoft Graph’s beta APIs, <strong>HTTP with Entra ID</strong> is a powerful ally.</p>
+<p><img alt="Final Confirmation" loading="lazy" src="screenshots/screenshot_0-08-00.png"></p>
+<p>Let me know what you build with it — and stay tuned for more Power Platform tricks.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://example.org/">Dave365 Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
