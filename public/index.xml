@@ -19,7 +19,7 @@
     &lt;/div&gt;
 
 &lt;h2 id=&#34;-the-question-can-i-leverage-exsiting-connectors-to-make-graph-api-calls&#34;&gt;🧩 The Question: Can I leverage exsiting connectors to make Graph API calls?&lt;/h2&gt;
-&lt;p&gt;Recently, I found myself needing to query the &lt;a href=&#34;https://learn.microsoft.com/en-us/graph/api/teamsappinstallation-get?view=graph-rest-beta&amp;amp;tabs=http&#34;&gt;Teams Templates API&lt;/a&gt; via Power Automate. The goal was simple — call the Graph beta endpoint to get available Teams templates.&lt;/p&gt;</description>
+&lt;p&gt;Recently, I found myself needing to query the &lt;a href=&#34;https://learn.microsoft.com/en-us/graph/api/teamsappinstallation-get?view=graph-rest-beta&amp;amp;tabs=http&#34;&gt;Teams Templates API&lt;/a&gt; via Power Automate. I wanted to try and use out of the box connectors, but found that specific endpoints were blocked.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

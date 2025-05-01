@@ -10,13 +10,13 @@ title: "🚀 Unlocking Hidden Microsoft Graph API Endpoints in Power Automate wi
 
 ## 🧩 The Question: Can I leverage exsiting connectors to make Graph API calls?
 
-Recently, I found myself needing to query the [Teams Templates API](https://learn.microsoft.com/en-us/graph/api/teamsappinstallation-get?view=graph-rest-beta&tabs=http) via Power Automate. The goal was simple — call the Graph beta endpoint to get available Teams templates.
+Recently, I found myself needing to query the [Teams Templates API](https://learn.microsoft.com/en-us/graph/api/teamsappinstallation-get?view=graph-rest-beta&tabs=http) via Power Automate. I wanted to try and use out of the box connectors, but found that specific endpoints were blocked.
 
-Using the standard **“Send HTTP request to Graph”** connector? No luck. The request would consistently fail:
+Using the standard **“Send a Microsoft Graph HTTP Request”** connector? No luck. The request would consistently fail:
 
-> ❌ "The endpoint isn't supported by this connector."
+> ❌ "URI path is not a valid Graph endpont."
 
-![Standard Connector Error](screenshots/screenshot_0-00-50.png)
+![Standard Connector Error](/static/http-for-entra/failed_request.png)
 
 Sure, I could have created an **App Registration**, but managing client secrets and access tokens adds overhead I wasn’t looking for. Thankfully, there’s a better way.
 
@@ -24,7 +24,7 @@ Sure, I could have created an **App Registration**, but managing client secrets 
 
 ## ✅ The Solution: HTTP with Entra ID Connector
 
-Enter: the **HTTP with Entra ID connector**. This under-the-radar gem allows you to make authenticated HTTP requests — even to endpoints not officially supported.
+Enter: the **HTTP with Entra ID connector**. This connector has flown under the radar for me and allows you to make any API request within Microsoft 365 if used correctly.
 
 There are **two flavors** of this connector:
 
@@ -57,13 +57,15 @@ GET https://graph.microsoft.com/beta/teamsTemplates
 
 If this fails (as expected), it means that scope (`TeamTemplates.Read`) isn’t yet granted.
 
+![HTTP With Microsoft Entra](/static/http-for-entra/http_with_entra.png)
+
 ---
 
 ## 🛠️ Granting Permissions via PowerShell
 
-Microsoft provides a [PowerShell script](https://learn.microsoft.com/en-us/power-platform/power-automate/http-with-entra-id#configure-api-permissions) that simplifies updating app permissions.
+Microsoft provides a [PowerShell script](https://github.com/microsoft/PowerApps-Samples/blob/master/powershell/connectors/HTTPWithMicrosoftEntraId/ManagePermissionGrant.ps1) that simplifies updating app permissions.
 
-![Permissions Grant via PowerShell](screenshots/screenshot_0-02-50.png)
+![Permissions Grant via PowerShell](/static/http-for-entra/powershell_script.png)
 
 📌 **Key Tips:**
 
@@ -78,9 +80,11 @@ Once you grant the necessary scopes (e.g., `TeamTemplates.Read.All`), your flow 
 
 After assigning the correct permissions and re-testing:
 
-![Successful Call](screenshots/screenshot_0-06-40.png)
+![Successful Call](/static/http-for-entra/successful_request.png)
 
 You’ll be able to successfully call the previously blocked Graph endpoint.
+
+Note: This process can be repeated for multipe graph requests, or any other available API.
 
 ---
 
@@ -94,16 +98,14 @@ You’ll be able to successfully call the previously blocked Graph endpoint.
 
 ## 📚 Resources
 
-- 📄 [Official Docs – HTTP with Entra ID](https://learn.microsoft.com/en-us/power-platform/power-automate/http-with-entra-id)
-- 🧑‍💻 [Timo Pertilä Blog](https://some-example.com)
-- 🛠️ [PowerShell Script from Docs](https://learn.microsoft.com/en-us/power-platform/power-automate/http-with-entra-id#configure-api-permissions)
+- 📄 [Official Docs – HTTP with Entra ID](https://learn.microsoft.com/en-us/connectors/webcontentsv2/)
+- 🧑‍💻 [Timo Pertilä Blog](https://forwardforever.com/what-is-the-difference-between-http-with-microsoft-entra-id-and-http-with-microsoft-entra-id-preauthorized-connectors/)
+- 🛠️ [Davids Blog](https://dev.to/wyattdave/power-automate-the-super-connector-3gbe)
 
 ---
 
 ## 🎯 Final Thoughts
 
-This technique is a brilliant workaround when you don’t want to dive into full-blown app registrations. Whether you’re building lightweight flows or experimenting with Microsoft Graph’s beta APIs, **HTTP with Entra ID** is a powerful ally.
-
-![Final Confirmation](screenshots/screenshot_0-08-00.png)
+This technique is a brilliant workaround when you don’t want to dive into full-blown app registrations. Whether you’re building lightweight flows or experimenting with Microsoft Graph’s beta APIs, **HTTP with Entra ID** could suit your needs.
 
 Let me know what you build with it — and stay tuned for more Power Platform tricks.
